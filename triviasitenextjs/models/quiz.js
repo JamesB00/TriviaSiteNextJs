@@ -1,5 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
+//May need to add an id if mongo/mongoose doesn't automatically
 const quizSchema = new Schema({
   title: {
     type: String,
@@ -10,9 +11,8 @@ const quizSchema = new Schema({
     ref: "User",
   },
   questions: { type: Array },
-  difficulty: {
-    type: Number,
-  },
+  rating: { type: Number },
+  difficulty: { type: Number },
 });
 
 const Quiz = models.Quiz || model("Quiz", quizSchema);
