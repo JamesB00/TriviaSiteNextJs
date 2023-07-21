@@ -1,0 +1,21 @@
+[
+  {
+    "question": "Which philosopher is known for their 'Theory of forms'?",
+    "answers": ["Aristotle", "Plato", "al-Kindi", "John Locke"],
+    "tag": "Philosophy",
+    "correct": "Plato"
+  },
+  {
+    "question": "Which of the following fields give the property of mass to matter?",
+    "answers": ["Electron field", "Gluon field", "Higgs field", "Tau field"],
+    "tag": "Science",
+    "tag2": "Physics",
+    "correct": "Higgs field"
+  },
+  {
+    "question": "What statistical distribution is defined by two states in the sample space for one trial: success and failure?",
+    "answers": ["Gaussian", "Exponential", "Bernoulli", "Chi Squared"],
+    "tag": "Mathematics",
+    "correct": "Bernoulli"
+  }
+]
