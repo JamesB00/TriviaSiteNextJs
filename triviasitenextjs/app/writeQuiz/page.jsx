@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
+import Quiz_Form from "@components/Quiz_Form";
 
 const writeQuiz = () => {
   const [submitting, setSubmitting] = useState(false);
+  const [quizArr, setQuizArr] = useState([]);
 
   const subTest = async () => {
     //Disable submit button
@@ -30,6 +32,7 @@ const writeQuiz = () => {
   //wants to add, or create some kind of inner form that handles it
   return (
     <div>
+      <Quiz_Form data={null} />
       <button
         disabled={submitting}
         onClick={() => {
