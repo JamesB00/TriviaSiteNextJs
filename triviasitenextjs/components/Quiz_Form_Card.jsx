@@ -3,57 +3,72 @@ import { useState, useEffect } from "react";
 
 const Quiz_Form_Card = ({ data }) => {
   return (
-    <div className="flex flex-col my-2 mx-6 md:mx-16 lg:mx-24">
-      {/* Quiz Title */}
-      <div className="">
+    <div className="flex flex-col my-2 mx-6 md:mx-16 lg:mx-24 border-2 border-blue-400 rounded-lg bg-white">
+      {/* Quiz Question */}
+      <div className=" flex bg-white rounded-t-lg border-b-2 border-blue-400">
+        <div className="w-full "></div>
         <label className="">
           <input
-            className="text-center w-full"
+            className="my-2 text-center"
             placeholder="Enter the question"
           ></input>
         </label>
+        <div className="w-full"></div>
       </div>
 
       {/* Quiz Answers */}
-      <div className="sm:flex sm:flex-col justify-center">
-        {/* Using the divs with white backgrounds to fill space in larger screens*/}
-
-        {/* First two answer options */}
-        <div className="sm:flex ">
-          <div className="bg-white w-full"></div>
+      <div className="sm:flex sm:flex-col justify-center bg-white  rounded-b-lg">
+        {/* Using the empty divs with w-full to fill out input fields*/}
+        <div className="flex my-1">
+          <div className="w-full"></div>
           <label>
             <input
-              className="w-full sm:w-auto text-center"
+              className="  text-center"
               placeholder="Enter answer choice 1"
             ></input>
           </label>
-          <div className="bg-white w-full"></div>
-          <label>
-            <input
-              className="w-full sm:w-auto text-center"
-              placeholder="Enter answer choice 2"
-            ></input>
-          </label>
-          <div className="bg-white w-full"></div>
+          <div className="w-full justify-center lg:justify-end lg:mr-4  flex">
+            <input name="ans_ques_0" type="radio"></input>
+          </div>
         </div>
 
-        {/* Last two answer options */}
-        <div className="sm:flex">
-          <div className="bg-white w-full"></div>
+        <div className="flex my-1">
+          <div className="w-full"></div>
           <label>
             <input
-              className="w-full sm:w-auto text-center"
-              placeholder="Enter answer choice 3"
+              className="  text-center"
+              placeholder="Enter answer choice 1"
             ></input>
           </label>
-          <div className="bg-white w-full"></div>
+          <div className="w-full justify-center lg:justify-end lg:mr-4 flex">
+            <input name="ans_ques_0" type="radio"></input>
+          </div>
+        </div>
+
+        <div className="flex my-1">
+          <div className="w-full"></div>
           <label>
             <input
-              className="w-full sm:w-auto text-center"
-              placeholder="Enter answer choice 4"
+              className="  text-center"
+              placeholder="Enter answer choice 1"
             ></input>
           </label>
-          <div className="rounded-br-lg bg-white w-full"></div>
+          <div className="w-full justify-center lg:justify-end lg:mr-4  flex">
+            <input name="ans_ques_0" type="radio"></input>
+          </div>
+        </div>
+
+        <div className="flex my-1">
+          <div className="w-full"></div>
+          <label>
+            <input
+              className="  text-center"
+              placeholder="Enter answer choice 1"
+            ></input>
+          </label>
+          <div className="w-full justify-center lg:justify-end lg:mr-4  flex">
+            <input name="ans_ques_0" type="radio"></input>
+          </div>
         </div>
 
         {/* Tag input */}
