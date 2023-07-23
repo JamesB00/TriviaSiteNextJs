@@ -2,8 +2,21 @@
 import { useState, useEffect } from "react";
 import Quiz_Form_Card from "@components/Quiz_Form_Card";
 
+const Quiz_Q_List = (qCards) => {
+  if (qCards == []) {
+    return <div>Hi</div>;
+  } else {
+    /*
+    return qCards.map((q, index) => (
+      <Quiz_Form_Card data={null} qNum={index}></Quiz_Form_Card>
+    ));*/
+  }
+};
+
 const Quiz_Form = ({ data }) => {
   const [quizData, setQuizData] = useState([]);
+  const [qCounter, setQCounter] = useState(0);
+  const [qInputCards, setQInputCards] = useState([[]]);
 
   const getData = () => {
     //Need to put all of these in their own loop to do it by question
@@ -25,6 +38,10 @@ const Quiz_Form = ({ data }) => {
     console.log(arr);
   };
 
+  const addCard = () => {
+    setQCounter((prev) => prev + 1);
+  };
+
   return (
     <div className="flex flex-col justify-center">
       <div className="flex mx-auto">
@@ -42,6 +59,18 @@ const Quiz_Form = ({ data }) => {
       </div>
 
       <Quiz_Form_Card data={null} qNum={0}></Quiz_Form_Card>
+      <Quiz_Q_List qCards={qInputCards}></Quiz_Q_List>
+      <div className="flex justify-center">
+        <button
+          onClick={() => {
+            addCard;
+          }}
+          className="w-6 rounded-md bg-white text-black"
+        >
+          +
+        </button>
+      </div>
+
       <button onClick={getData}>Click this one fr</button>
     </div>
   );
