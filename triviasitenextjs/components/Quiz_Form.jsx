@@ -2,44 +2,60 @@
 import { useState, useEffect } from "react";
 import Quiz_Form_Card from "@components/Quiz_Form_Card";
 
-const Quiz_Q_List = (qCards) => {
+const Quiz_Q_List = ({ qCards }) => {
   if (qCards == []) {
-    return <div>Hi</div>;
+    return <div className="bg-blue-600">Hi</div>;
   } else {
-    /*
+    console.log(qCards);
     return qCards.map((q, index) => (
-      <Quiz_Form_Card data={null} qNum={index}></Quiz_Form_Card>
-    ));*/
+      <Quiz_Form_Card
+        key={`ques_${index}_card`}
+        data={null}
+        qNum={index}
+      ></Quiz_Form_Card>
+    ));
   }
 };
 
 const Quiz_Form = ({ data }) => {
-  const [quizData, setQuizData] = useState([]);
-  const [qCounter, setQCounter] = useState(0);
-  const [qInputCards, setQInputCards] = useState([[]]);
+  const [qInputCards, setQInputCards] = useState([]);
 
   const getData = () => {
-    //Need to put all of these in their own loop to do it by question
-    //also need things for title, tag, etc.
-    const num = 0;
+    //For now, just getting all of the information using query select
+    //for the eventual submission to server. may go back and change
+    //cards to use state here and pass info up to easily collect it
+    //in this function.
     const arr = [];
-    const selAns = document.querySelector(
-      `input[name=quesAns_${num}]:checked`
-    ).value;
-    const corrAns = document.querySelector(
-      `input[name=ques_${num}_text_a${selAns}]`
-    ).value;
-    for (let i = 1; i < 5; i++) {
-      arr.push(
-        document.querySelector(`input[name=ques_${num}_text_a${i}]`).value
-      );
+    for (let j = 0; j < qInputCards.length; j++) {
+      //correct answer
+      const selAns = document.querySelector(
+        `input[name=quesAns_${j}]:checked`
+      ).value;
+      const corrAns = document.querySelector(
+        `input[name=ques_${j}_text_a${selAns}]`
+      ).value;
+
+      //all answers
+      const arr2 = [];
+      for (let i = 1; i < 5; i++) {
+        arr2.push(
+          document.querySelector(`input[name=ques_${j}_text_a${i}]`).value
+        );
+      }
+
+      //question
+      const ques = document.querySelector(`input[name=ques_${j}]`).value;
+
+      //tag
+      const tag = document.querySelector(`input[name=ques_${j}_tag]`).value;
+      arr.push([ques, arr2, tag, corrAns]);
     }
-    console.log(corrAns);
+
     console.log(arr);
   };
 
   const addCard = () => {
-    setQCounter((prev) => prev + 1);
+    setQInputCards((prev) => [...prev, []]);
   };
 
   return (
@@ -58,13 +74,10 @@ const Quiz_Form = ({ data }) => {
         <div className="bg-white rounded-r-lg w-5"></div>
       </div>
 
-      <Quiz_Form_Card data={null} qNum={0}></Quiz_Form_Card>
       <Quiz_Q_List qCards={qInputCards}></Quiz_Q_List>
       <div className="flex justify-center">
         <button
-          onClick={() => {
-            addCard;
-          }}
+          onClick={addCard}
           className="w-6 rounded-md bg-white text-black"
         >
           +
