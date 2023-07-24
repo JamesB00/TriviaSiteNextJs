@@ -9,7 +9,7 @@ const answer_choice_card = (num) => {};
 const Quiz_Form_Card = ({ data, qNum }) => {
   const aNums = [1, 2, 3, 4];
   return (
-    <div className="text-black flex flex-col my-2 mx-6 md:mx-16 lg:mx-24 border-2 border-blue-400 rounded-lg bg-white min-w-min">
+    <div className="text-black flex flex-col mt-2 mx-6 md:mx-16 lg:mx-24 border-2 border-blue-400 rounded-lg bg-white min-w-min">
       {/* Quiz Question */}
 
       <div className=" flex bg-white rounded-t-lg border-b-2 border-blue-400">
