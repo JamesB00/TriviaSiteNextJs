@@ -25,12 +25,7 @@ const Quiz_Form = ({ data }) => {
     setQuizTitle(e.target.value);
   };
 
-  const getData = () => {
-    //For now, just getting all of the information using query select
-    //for the eventual submission to server. may go back and change
-    //cards to use state here and pass info up to easily collect it
-    //in this function.
-
+  const getData = async () => {
     const arr = [];
     if (!quizTitle) {
       alert("Must name the quiz");
@@ -64,7 +59,7 @@ const Quiz_Form = ({ data }) => {
       );
 
       //question
-      const ques = document.querySelector(`input[name=ques_${j}]`);
+      const ques = document.querySelector(`textarea[name=ques_${j}]`);
 
       //tag
       const tag = document.querySelector(`input[name=ques_${j}_tag]`);
@@ -78,8 +73,11 @@ const Quiz_Form = ({ data }) => {
       }
       arr.push([ques.value, arr2, tag.value, corrAns.value]);
     }
-
-    console.log(arr);
+    const res = await fetch(`/api/quiz/submit`, {
+      method: "POST",
+      body: JSON.stringify(arr),
+    });
+    console.log(res);
   };
 
   const addCard = () => {
@@ -91,6 +89,8 @@ const Quiz_Form = ({ data }) => {
       <div className="flex mx-auto">
         <p>Quiz Title</p>
       </div>
+
+      {/* Input for Quiz Title */}
       <div className="flex mx-auto">
         <div className="bg-white rounded-l-lg w-5"></div>
         <label>
@@ -103,8 +103,10 @@ const Quiz_Form = ({ data }) => {
         <div className="bg-white rounded-r-lg w-5"></div>
       </div>
 
+      {/* Render the list of question cards */}
       <Quiz_Q_List qCards={qInputCards}></Quiz_Q_List>
 
+      {/* Button to add a new question card */}
       <div className="flex justify-center">
         <button
           onClick={addCard}
@@ -113,6 +115,8 @@ const Quiz_Form = ({ data }) => {
           +
         </button>
       </div>
+
+      {/* Button to submit quiz */}
       <div className="flex justify-center">
         <button className="mt-2 p-1 rounded-md bg-green-600" onClick={getData}>
           Submit Quiz

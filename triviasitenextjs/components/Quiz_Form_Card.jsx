@@ -1,11 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 
-//Need a way to match the value of the radio input to the text input for
-//the answers, somehow
-
-const answer_choice_card = (num) => {};
-
 const Quiz_Form_Card = ({ data, qNum }) => {
   const aNums = [1, 2, 3, 4];
   return (
@@ -13,15 +8,15 @@ const Quiz_Form_Card = ({ data, qNum }) => {
       {/* Quiz Question */}
 
       <div className=" flex bg-white rounded-t-lg border-b-2 border-blue-400">
-        <div className="w-full "></div>
-        <label className="">
-          <input
+        <div className="w-2 "></div>
+        <label className="w-full justify-content-center align-middle">
+          <textarea
             name={"ques_" + qNum}
-            className="my-2 text-center"
+            className="h-10 my-1 align-middle text-center w-full pt-2"
             placeholder="Enter the question"
-          ></input>
+          ></textarea>
         </label>
-        <div className="w-full"></div>
+        <div className="w-2"></div>
       </div>
 
       {/* Quiz Answers */}
@@ -45,7 +40,7 @@ const Quiz_Form_Card = ({ data, qNum }) => {
         ))}
 
         {/* Tag input */}
-        <div className="py-1 flex justify-center border-t-2 border-blue-400 ">
+        <div className="py-1 flex justify-center border-t-2 border-blue-400">
           <input
             name={"ques_" + qNum + "_tag"}
             className="text-center text-black min-w-full"

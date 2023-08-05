@@ -1,7 +1,12 @@
 import { connectToDB } from "@utils/database";
 
-export const POST = async () => {
+export const POST = async (req, res) => {
   try {
+    const incData = await req.json();
+    //incdata Is an array with the first element being the quiz title,
+    //and all others are sub arrays composed like:
+    //[question, [answer choices], correct_answer, question_tag]
+    console.log(incData);
     await connectToDB();
 
     //I'll need to validate data, and then insert it into the db
