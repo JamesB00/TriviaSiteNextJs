@@ -7,8 +7,8 @@ const quizSchema = new Schema({
     required: [true, "Need a title for the quiz"],
   },
   creator: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
+    required: [true, "Must have a quiz creator"],
   },
   questions: { type: Array },
   rating: { type: Number },

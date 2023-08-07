@@ -14,11 +14,8 @@ const writeQuiz = () => {
     //TODO
 
     //Submit data above for the quiz submit api endpoint
-    const res = await fetch("/api/quiz/submit", {
-      method: "POST",
-      body: JSON.stringify({
-        testmsg: "Hey there",
-      }),
+    const res = await fetch("/api/quiz/testget", {
+      method: "GET",
     });
 
     //Get response and do something

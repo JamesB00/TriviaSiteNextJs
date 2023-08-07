@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Quiz_Form_Card from "@components/Quiz_Form_Card";
 
 const Quiz_Q_List = ({ qCards }) => {
@@ -20,6 +21,7 @@ const Quiz_Q_List = ({ qCards }) => {
 const Quiz_Form = ({ data }) => {
   const [qInputCards, setQInputCards] = useState([]);
   const [quizTitle, setQuizTitle] = useState("");
+  const { data: session } = useSession();
 
   const updateTitle = (e) => {
     setQuizTitle(e.target.value);
@@ -36,6 +38,7 @@ const Quiz_Form = ({ data }) => {
       alert("Must be composed of at least one question");
       return;
     }
+    arr.push(session.user.email);
     for (let j = 0; j < qInputCards.length; j++) {
       //all answers
       const arr2 = [];
