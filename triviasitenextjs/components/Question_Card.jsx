@@ -7,6 +7,7 @@ const Question_Card = ({ question, answers, quesNo, tag, status }) => {
     <div className=" text-black p-1">
       {/*Question card Header */}
       {status[0] ? (
+        //If the answer was correct
         status[1][0] == "correct" ? (
           <div
             className="text-white p-1 flex justify-center border-b-2 bg-green-800 border-black rounded-t-md "
@@ -23,6 +24,7 @@ const Question_Card = ({ question, answers, quesNo, tag, status }) => {
           </div>
         )
       ) : (
+        //If the answer was not correct
         <div
           className=" p-1 flex justify-center border-b-2 bg-white border-black rounded-t-md "
           name={`outer_ques_${quesNo}`}

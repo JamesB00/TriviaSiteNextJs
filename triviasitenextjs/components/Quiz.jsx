@@ -76,8 +76,6 @@ const Quiz = () => {
     }
     console.log(gradedQs);
     setGraded((prev) => !prev);
-    //next, do something with the response, maybe make a state to disable
-    //submitting the form again
   };
 
   useEffect(() => {
