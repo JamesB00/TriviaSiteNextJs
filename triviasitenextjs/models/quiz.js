@@ -11,6 +11,9 @@ const quizSchema = new Schema({
     required: [true, "Must have a quiz creator"],
   },
   questions: { type: Array },
+  tag: {
+    type: String,
+  },
   rating: { type: Number },
   difficulty: { type: Number },
 });

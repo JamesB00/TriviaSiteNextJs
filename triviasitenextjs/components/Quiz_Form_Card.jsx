@@ -38,15 +38,6 @@ const Quiz_Form_Card = ({ data, qNum }) => {
             </div>
           </div>
         ))}
-
-        {/* Tag input */}
-        <div className="py-1 flex justify-center border-t-2 border-blue-400">
-          <input
-            name={"ques_" + qNum + "_tag"}
-            className="text-center text-black min-w-full"
-            placeholder="Enter the question tag"
-          ></input>
-        </div>
       </div>
     </div>
   );

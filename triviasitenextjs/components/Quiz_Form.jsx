@@ -21,10 +21,15 @@ const Quiz_Q_List = ({ qCards }) => {
 const Quiz_Form = ({ data }) => {
   const [qInputCards, setQInputCards] = useState([]);
   const [quizTitle, setQuizTitle] = useState("");
+  const [quizTag, setQuizTag] = useState("");
   const { data: session } = useSession();
 
   const updateTitle = (e) => {
     setQuizTitle(e.target.value);
+  };
+
+  const updateTag = (e) => {
+    setQuizTag(e.target.value);
   };
 
   const getData = async () => {
@@ -33,12 +38,23 @@ const Quiz_Form = ({ data }) => {
       alert("Must name the quiz");
       return;
     }
+    if (!quizTag) {
+      alert("Must give the quiz a tag");
+      return;
+    }
     arr.push([quizTitle]);
+    arr.push(quizTag);
     if (qInputCards.length == 0) {
       alert("Must be composed of at least one question");
       return;
     }
-    arr.push(session.user.email);
+
+    try {
+      arr.push(session.user.email);
+    } catch {
+      arr.push("Anonymous User");
+    }
+
     for (let j = 0; j < qInputCards.length; j++) {
       //all answers
       const arr2 = [];
@@ -64,17 +80,14 @@ const Quiz_Form = ({ data }) => {
       //question
       const ques = document.querySelector(`textarea[name=ques_${j}]`);
 
-      //tag
-      const tag = document.querySelector(`input[name=ques_${j}_tag]`);
-
-      //Final check for question and tag
-      if (!ques || !tag.value) {
+      //Final check for question
+      if (!ques) {
         alert(
-          "Please enter responses for all fields, including question and tag."
+          "Please enter responses for all fields, including question fields."
         );
         return;
       }
-      arr.push([ques.value, arr2, tag.value, corrAns.value]);
+      arr.push([ques.value, arr2, corrAns.value]);
     }
     const res = await fetch(`/api/quiz/submit`, {
       method: "POST",
@@ -94,16 +107,21 @@ const Quiz_Form = ({ data }) => {
       </div>
 
       {/* Input for Quiz Title */}
-      <div className="flex mx-auto">
-        <div className="bg-white rounded-l-lg w-5"></div>
-        <label>
-          <input
-            className="text-center text-black focus:outline-none h-10"
-            placeholder="Enter a Title for the Quiz"
-            onChange={updateTitle}
-          ></input>
-        </label>
-        <div className="bg-white rounded-r-lg w-5"></div>
+      <div className="flex justify-center w-full">
+        <textarea
+          className="text-center text-black focus:outline-none rounded-lg p-2 w-full h-10 mx-16"
+          placeholder="Enter a Title for the Quiz"
+          onChange={updateTitle}
+        ></textarea>
+      </div>
+
+      {/* Input for Quiz Tag */}
+      <div className="flex mx-auto mt-2">
+        <textarea
+          className="text-center text-black focus:outline-none rounded-lg p-2 w-full h-10"
+          placeholder="Enter a Tag for the Quiz"
+          onChange={updateTag}
+        ></textarea>
       </div>
 
       {/* Render the list of question cards */}

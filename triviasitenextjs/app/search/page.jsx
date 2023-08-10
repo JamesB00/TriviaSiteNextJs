@@ -5,19 +5,33 @@ import Quiz_Card from "@components/Quiz_Card";
 
 //Not technically sure if this dynamic routing is correct, but it seems to be working fine
 
-const search = ({ params }) => {
-  const { quizResults, setQuizResults } = useState([]);
+const search = () => {
+  const [searchText, setSearchText] = useState([]);
+
+  const handleSearchTextChange = (e) => {
+    setSearchText(e.target.value);
+  };
 
   useEffect(() => {
     //Here, I'll need to make an api request to get quizzes back to populate the page with
     //by way of setting the quizResults state
-  }, []);
+  }, [searchText]);
 
   return (
     <section className="my-2 mx-16 lg:mx-32">
+      <div className="flex text-black">
+        <div className="w-2 bg-white rounded-l-lg" />
+        <textarea
+          className="w-full text-center h-10 pt-2 resize-none"
+          placeholder="Search for a quiz tag"
+          onChange={handleSearchTextChange}
+        ></textarea>
+        <div className="w-2 bg-white rounded-r-lg" />
+      </div>
+      <br></br>
       <div className="bg-white rounded-md text-black flex flex-col justify-center">
         <Quiz_Card
-          quizTitle={params.searchText}
+          quizTitle={"First Title"}
           quizCreator={"me@gmail.com"}
           quizTag={"Misc"}
         ></Quiz_Card>
