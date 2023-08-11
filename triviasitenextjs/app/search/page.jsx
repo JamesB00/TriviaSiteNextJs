@@ -6,13 +6,24 @@ import Quiz_Card from "@components/Quiz_Card";
 //Not technically sure if this dynamic routing is correct, but it seems to be working fine
 
 const search = () => {
-  const [searchText, setSearchText] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
   };
 
+  const getQuizzes = async (searchTxt) => {
+    const res = await fetch(`/api/searchQuizzes/${searchTxt}`, {
+      method: "GET",
+    });
+    const data = await res.json();
+
+    console.log(data);
+  };
+
   useEffect(() => {
+    const timeOutId = setTimeout(() => getQuizzes(searchText), 1000);
+    return () => clearTimeout(timeOutId);
     //Here, I'll need to make an api request to get quizzes back to populate the page with
     //by way of setting the quizResults state
   }, [searchText]);
