@@ -10,6 +10,7 @@ const Nav = () => {
   const [toggled, setToggled] = useState(false);
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const setUpProviders = async () => {

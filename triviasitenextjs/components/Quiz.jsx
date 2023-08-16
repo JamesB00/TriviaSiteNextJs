@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Question_Card from "./Question_Card";
+import Quiz_Card from "./Quiz_Card";
 import triviaqs from "../public/triviaqs.json";
 
-const Question_Card_List = ({ questions, graded, gradedInfo }) => {
+const Quiz_Card_List = ({ questions, graded, gradedInfo }) => {
   const qs = questions;
 
   return (
@@ -11,7 +11,7 @@ const Question_Card_List = ({ questions, graded, gradedInfo }) => {
       <div className="flex justify-center text-lg">Quiz</div>
       <div className="gap-3 lg:gap-4 flex flex-col lg:container lg:mx-auto">
         {qs.map((ques, index) => (
-          <Question_Card
+          <Quiz_Card
             key={"question" + `_${index}`}
             question={ques.question}
             answers={ques.answers}
@@ -100,7 +100,7 @@ const Quiz = () => {
       )}
 
       <form id="currQuiz">
-        <Question_Card_List
+        <Quiz_Card_List
           questions={questions}
           graded={graded}
           gradedInfo={gradedQs}

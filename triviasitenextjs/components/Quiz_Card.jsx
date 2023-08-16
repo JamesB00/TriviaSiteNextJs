@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Question_Card = ({ question, answers, quesNo, tag, status }) => {
+const Quiz_Card = ({ question, answers, quesNo, tag, status }) => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
   return (
@@ -65,4 +65,4 @@ const Question_Card = ({ question, answers, quesNo, tag, status }) => {
   );
 };
 
-export default Question_Card;
+export default Quiz_Card;
