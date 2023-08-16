@@ -32,7 +32,7 @@ const SearchQuizCards = ({ data, search, searchStatus }) => {
   }
 };
 
-const Quiz_Search_Form = () => {
+const Quiz_Search_Form = ({ paramText }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [toggleSearching, setToggleSearching] = useState(false);
@@ -54,6 +54,12 @@ const Quiz_Search_Form = () => {
     setSearchResults(data);
     setToggleSearching((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (paramText != "" && paramText) {
+      setSearchText(paramText);
+    }
+  }, []);
 
   useEffect(() => {
     //Use a timout to not constantly be pulling from database on every character change

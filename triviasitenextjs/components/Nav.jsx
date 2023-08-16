@@ -2,15 +2,26 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
   const [toggled, setToggled] = useState(false);
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const { push } = useRouter();
+
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log("testing redirect on nav search");
+    push(`/search/${searchText}`);
+  };
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -32,19 +43,23 @@ const Nav = () => {
           Minute Quizzes
         </Link>
       </div>
-
-      {/* Desktop Search bar */}
-      <div className="hidden sm:flex col-span-1 col-start-2">
-        <div className="bg-white text-black min-h-[2rem] my-2 rounded-l-lg flex">
-          <Image src="search.svg" width={15} height={15} className="ml-2" />
+      {window.location.href.includes("/search/") ? (
+        <div></div>
+      ) : (
+        /* Desktop Search bar */
+        <div className="hidden sm:flex col-span-1 col-start-2">
+          <div className="bg-white text-black min-h-[2rem] my-2 rounded-l-lg flex">
+            <Image src="search.svg" width={15} height={15} className="ml-2" />
+          </div>
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              placeholder="Search for a specific quiz"
+              className="text-black rounded-r-lg my-2 min-h-[2rem] lg:min-w-[400px] pl-2"
+              onChange={handleSearchChange}
+            ></input>
+          </form>
         </div>
-        <input
-          placeholder="Search for a specific quiz"
-          className="rounded-r-lg my-2 min-h-[2rem] lg:min-w-[400px] pl-2"
-          value=""
-          readOnly
-        ></input>
-      </div>
+      )}
 
       {/* Desktop Options */}
       <div className="hidden sm:flex ml-auto mr-5 justify-between gap-3 lg:gap-6">
