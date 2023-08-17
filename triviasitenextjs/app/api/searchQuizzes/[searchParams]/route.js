@@ -6,13 +6,15 @@ export const GET = async (request, { params }) => {
   try {
     console.log(params.searchParams);
     await connectToDB();
-    const quizRes = await Quiz.find({ tag: params.searchParams });
+    const quizRes = await Quiz.find({ tag: params.searchParams }).select({
+      questions: 0,
+    });
     console.log(quizRes);
     return new Response(JSON.stringify({ quizzes: quizRes }), {
       status: 200,
     });
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Didn't work" }), {
+    return new Response(JSON.stringify({ message: error }), {
       status: 500,
     });
   }

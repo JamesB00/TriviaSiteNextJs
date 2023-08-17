@@ -43,7 +43,7 @@ const Quiz_Form = ({ data }) => {
       return;
     }
     arr.push([quizTitle]);
-    arr.push(quizTag);
+    arr.push(quizTag.toLowerCase());
     if (qInputCards.length == 0) {
       alert("Must be composed of at least one question");
       return;

@@ -11,6 +11,7 @@ const Nav = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [windowCheck, setWindowcheck] = useState(typeof window !== undefined);
   const { push } = useRouter();
 
   const handleSearchChange = (e) => {
@@ -22,6 +23,10 @@ const Nav = () => {
     console.log("testing redirect on nav search");
     push(`/search/${searchText}`);
   };
+
+  useEffect(() => {
+    setWindowcheck((prev) => !prev);
+  }, [typeof window]);
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -43,7 +48,10 @@ const Nav = () => {
           Minute Quizzes
         </Link>
       </div>
-      {window.location.href.includes("/search/") ? (
+      {/* Nested ternary, bad practice but checks to make sure the window exists before checking substring */}
+      {windowCheck ? (
+        <div></div>
+      ) : window.location.href.includes("/search/") ? (
         <div></div>
       ) : (
         /* Desktop Search bar */

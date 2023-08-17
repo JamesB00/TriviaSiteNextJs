@@ -25,7 +25,7 @@ const Quiz_Card_List = ({ questions, graded, gradedInfo }) => {
   );
 };
 
-const Quiz = () => {
+const Quiz = ({ id }) => {
   const [questions, setQuestions] = useState([]);
   const [gradedQs, setGradedQs] = useState([]);
   const [graded, setGraded] = useState(false);
@@ -112,6 +112,7 @@ const Quiz = () => {
           onClick={getAnswers}
           disabled={graded}
           hidden={graded}
+          quizId={id}
         >
           Submit
         </button>
