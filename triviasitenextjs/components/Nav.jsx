@@ -20,7 +20,6 @@ const Nav = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log("testing redirect on nav search");
     push(`/search/${searchText}`);
   };
 

@@ -9,7 +9,7 @@ export const GET = async (request, { params }) => {
     const quizRes = await Quiz.find({ tag: params.searchParams }).select({
       questions: 0,
     });
-    console.log(quizRes);
+
     return new Response(JSON.stringify({ quizzes: quizRes }), {
       status: 200,
     });

@@ -26,6 +26,7 @@ const SearchQuizCards = ({ data, search, searchStatus }) => {
         quizTitle={elem.title}
         quizCreator={elem.creator}
         quizTag={elem.tag}
+        quizId={elem._id}
         key={"searchCard_" + index}
       ></Quiz_Search_Card>
     ));
@@ -50,7 +51,7 @@ const Quiz_Search_Form = ({ paramText }) => {
       method: "GET",
     });
     const data = await res.json();
-
+    console.log(data);
     setSearchResults(data);
     setToggleSearching((prev) => !prev);
   };

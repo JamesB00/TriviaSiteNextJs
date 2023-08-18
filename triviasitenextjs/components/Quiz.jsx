@@ -4,22 +4,23 @@ import Quiz_Card from "./Quiz_Card";
 import triviaqs from "../public/triviaqs.json";
 
 const Quiz_Card_List = ({ questions, graded, gradedInfo }) => {
-  const qs = questions;
-
+  console.log(questions);
   return (
     <div className="flex flex-col">
-      <div className="flex justify-center text-lg">Quiz</div>
       <div className="gap-3 lg:gap-4 flex flex-col lg:container lg:mx-auto">
-        {qs.map((ques, index) => (
-          <Quiz_Card
-            key={"question" + `_${index}`}
-            question={ques.question}
-            answers={ques.answers}
-            quesNo={index}
-            tag={ques.tag}
-            status={[graded, gradedInfo[index]]}
-          />
-        ))}
+        {questions[0] ? (
+          questions[0].questions.map((ques, index) => (
+            <Quiz_Card
+              key={"question" + `_${index}`}
+              question={ques[0]}
+              answers={ques[1]}
+              quesNo={index}
+              status={[graded, gradedInfo[index]]}
+            />
+          ))
+        ) : (
+          <div>Questions not real</div>
+        )}
       </div>
     </div>
   );
@@ -80,10 +81,9 @@ const Quiz = ({ id }) => {
 
   useEffect(() => {
     const qSetup = async () => {
-      const data = await fetch(`/triviaqs.json`);
-      const qs = await data.json();
-
-      setQuestions(qs);
+      const data = await fetch(`/api/quiz/${id}`);
+      const dataJ = await data.json();
+      setQuestions(dataJ.result);
     };
     qSetup();
   }, []);
@@ -112,7 +112,6 @@ const Quiz = ({ id }) => {
           onClick={getAnswers}
           disabled={graded}
           hidden={graded}
-          quizId={id}
         >
           Submit
         </button>
